@@ -1,20 +1,27 @@
-import Head from 'next/head'
-import { Global } from '@emotion/react'
-import xw from 'xwind'
-
-function App({ Component, pageProps }) {
+import React from 'react';
+import  Router  from "next/router"
+import '../styles/globals.scss';
+import { Layout } from '../components';
+import NProgress from "nprogress"
+import Head from 'next/head';
+import progressbarstyles from "../styles/progressbar.scss"
+function MyApp({ Component, pageProps }) {
+  NProgress.configure({showSpinner:false})
+  Router.events.on("routeChangeStart",()=>NProgress.start())
+  NProgress.configure({showSpinner:false})
+  Router.events.on("routeChangeComplete",()=>NProgress.done())
   return (
     <>
       <Head>
-        <title>Tailwindcss Emotion Example</title>
+        <link rel='stylesheet' href={progressbarstyles}/>
+        <link rel="icon" href="web-icon.png"/>
       </Head>
-      <Global
-        //tailwind base styles + keyframes + ring and shadow classes variables  ... to global styles
-        styles={xw`XWIND_BASE XWIND_GLOBAL`}
-      />
+    <Layout>
       <Component {...pageProps} />
+    </Layout>
     </>
-  )
+  );
+
 }
 
-export default App
+export default MyApp;
