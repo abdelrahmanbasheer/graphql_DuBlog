@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link rel='stylesheet' href={progressbarstyles}/>
+        <link rel='stylesheet' href="../styles/progressbar.scss"/>
         <link rel="icon" href="web-icon.png"/>
       </Head>
     <Layout>
