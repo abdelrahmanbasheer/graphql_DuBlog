@@ -1,27 +1,29 @@
 
 import  Link  from "next/link"
 import { useState,useEffect } from 'react'
-import { getCategories } from '../services'
+import {getSpecialize} from '../services'
 const Header = () => {
-    const [categories, setCategories] = useState([])
+    const [specializations, setSpecializations] = useState([])
+
   useEffect(() => {
-    getCategories().then((newcategories)=>setCategories(newcategories))
+    
+    getSpecialize().then((specialize)=>setSpecializations(specialize))
   
   }, [])
-    return (
+ return (
         <div className='container mx-auto px-10 mb-8'>
         <div className="border-b w-full inline-block border-white py-8">
             <div className="md:float-left block">
                 <Link href="/">
-                <span className='cursor-pointer font-bold text-4xl text-white transition ease duration-500 hover:text-blue-300'>DuBlog</span>
+                <span className='cursor-pointer font-bold text-4xl text-white transition ease duration-500 hover:text-blue-300'>CCIT <br /> <span className="text-xl">from students to students</span></span>
                 </Link>
             </div>
             <div className="hidden md:float-left md:contents ">
             {
-                categories.map((category)=>(
-                    <Link key={category.slug} href={`/category/${category.slug}`}>
-                        <span className='md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer transition ease duration-500 hover:text-blue-300 '>
-                            {category.name}
+                specializations.map((specialization)=>(
+                    <Link key={specialization.slug} href={`/specialization/${specialization.slug}`}>
+                        <span className='md:float-right mt-8 align-middle text-white ml-4 font-semibold cursor-pointer transition ease duration-500 hover:text-blue-300 '>
+                            {specialization.subname}
                         </span>
                     </Link>
                 ))

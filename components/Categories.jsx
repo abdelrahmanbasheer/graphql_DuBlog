@@ -1,24 +1,26 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import Link from 'next/link'
-import { getCategories } from '../services'
+import { getSpecialize } from '../services'
 
 const Categories = () => {
-  const [categories, setCategories] = useState([])
-useEffect(() => {
-  getCategories().then((newcategories)=>setCategories(newcategories))
+  const [specializations, setSpecializations] = useState([])
 
-}, [])
+  useEffect(() => {
+    
+    getSpecialize().then((specialize)=>setSpecializations(specialize))
+  
+  }, [])
 
   return (
-    <div className='bg-white opacity-90 transition ease duration-500 hover:opacity-100 shadow-lg rounded-lg p-8 mb-8 pb-12 '>
+    <div className='bg-gradient-to-t from-blue-200 to-gray-200 opacity-90 transition ease duration-500 hover:opacity-100 shadow-lg rounded-lg p-8 mb-8 pb-12 '>
       <h3 className='text-xl mb-8 font-semibold border-b pb-4 '>
-        Categories
+        Specializations
       </h3>
-      {categories.map((category)=>(
-        <Link key={category.slug} href={`/category/${category.slug}`}>
+      {specializations.map((specialization)=>(
+        <Link key={specialization.slug} href={`/specialization/${specialization.slug}`}>
           <span className='cursor-pointer block pb-3 mb-3 transition ease duration-500 hover:text-blue-400'>
-            {category.name}</span>
+            {specialization.name}</span>
         </Link>
       ))}
       </div>

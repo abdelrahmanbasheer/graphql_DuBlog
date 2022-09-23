@@ -28,12 +28,12 @@ const FeaturedPosts = () => {
   const [featuredPosts, setFeaturedPosts] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  useEffect(() => {
-    getFeaturedPosts().then((result) => {
-      setFeaturedPosts(result);
-      setDataLoaded(true);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getFeaturedPosts().then((result) => {
+  //     setFeaturedPosts(result);
+  //     setDataLoaded(true);
+  //   });
+  // }, []);
 
   const customLeftArrow = (
     <div className="absolute arrow-btn left-0 text-center py-3  cursor-pointer bg-black opacity-90 rounded-full">
@@ -50,7 +50,6 @@ const FeaturedPosts = () => {
       </svg>
     </div>
   );
-
   return (
     <div className="mb-8">
       <Carousel infinite customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass="px-4">

@@ -1,6 +1,7 @@
 import { request, gql } from 'graphql-request';
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+const graphqlAPI1 = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+const graphqlAPI=process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT_2;
 export const getPosts = async () => {
   const query = gql`
     query MyQuery {
@@ -81,21 +82,21 @@ export const getSimilarPosts = async (categories, slug) => {
 
   return result.posts;
 };
-export const getCategories = async ()=>{
-  const query = gql `
-  query GetCategories{
+// export const getCategories = async ()=>{
+//   const query = gql `
+//   query GetCategories{
 
-    categories{
-      name
-      slug
-    }
-  }
+//     categories{
+//       name
+//       slug
+//     }
+//   }
   
-  `
-  const result = await request(graphqlAPI, query);
+//   `
+//   const result = await request(graphqlAPI, query);
 
-  return result.categories;
-}
+//   return result.categories;
+// }
 export const getPostDetails = async (slug) => {
   const query = gql`
   query GetPostDetails($slug: String!) {
@@ -136,45 +137,45 @@ content{
   return result.post;
 }
 
-export const getComments = async (slug) => {
-  const query = gql`
-    query GetComments($slug:String!) {
-      comments(where: { post: { slug: $slug } } ) {
-        name
-        createdAt
-        comment
-      }
-    }
-  `;
+// export const getComments = async (slug) => {
+//   const query = gql`
+//     query GetComments($slug:String!) {
+//       comments(where: { post: { slug: $slug } } ) {
+//         name
+//         createdAt
+//         comment
+//       }
+//     }
+//   `;
 
-  const result = await request(graphqlAPI, query, { slug });
+//   const result = await request(graphqlAPI, query, { slug });
 
-  return result.comments;
-};
-export const getFeaturedPosts = async () => {
-  const query = gql`
-    query GetCategoryPost() {
-      posts(where: {featuredPost: true}) {
-        author {
-          name
-          photo {
-            url
-          }
-        }
-        featuredImage {
-          url
-        }
-        title
-        slug
-        createdAt
-      }
-    }   
-  `;
+//   return result.comments;
+// };
+// export const getFeaturedPosts = async () => {
+//   const query = gql`
+//     query GetCategoryPost() {
+//       posts(where: {featuredPost: true}) {
+//         author {
+//           name
+//           photo {
+//             url
+//           }
+//         }
+//         featuredImage {
+//           url
+//         }
+//         title
+//         slug
+//         createdAt
+//       }
+//     }   
+//   `;
 
-  const result = await request(graphqlAPI, query);
+//   const result = await request(graphqlAPI, query);
 
-  return result.posts;
-};
+//   return result.posts;
+// };
 export const GetCategoriesPosts= async (slug)=>{
   const query = gql`
   query GetCategoriesPosts($slug: String!) {
@@ -203,7 +204,47 @@ export const GetCategoriesPosts= async (slug)=>{
   
   
   `
-  const result = await request(graphqlAPI, query,{slug});
 
-  return result.posts;
+}
+
+export const getSpecialize= async ()=>{
+  const query =gql `
+  query getSpecialize{
+    specializationS{
+      name
+      slug
+      subname
+    }
+  }
+  
+  `
+  const result = await request(graphqlAPI1, query);
+
+  return result.specializationS;
+}
+export const getSpecPosts= async (week,term,specialization)=>{
+
+const query = gql`
+
+query getSpecPosts($week: String, $term: String, $specialization:String) {
+  posts(
+    where: {week: $week, term: $term, specialization: {name_contains: $specialization}}
+  ) {
+    title
+    image {
+      url
+    }
+    createdAt
+    week
+    term
+  }
+}
+
+
+
+
+`
+const result = await request(graphqlAPI1, query,{week,term,specialization});
+return result.posts
+
 }
